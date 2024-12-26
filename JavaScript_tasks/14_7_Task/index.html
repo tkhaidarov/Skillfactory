@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Input</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="wrap">
+    <div class="container">
+      <label for="#input-number"> Номер страницы:
+        <input type="number" id=input-number" placeholder="от 1 до 10" class="input page-number">
+      </label>
+      <label for="#input-limit" class="label-limit"> Лимит:
+        <input type="number" id=input-limit" placeholder="от 1 до 10" class="input limit">
+      </label>
+      <button class="query-btn">Запрос</button>
+    </div>
+    <div class="error-message">
+      <div class = "result"></div>
+    </div>
+  </div>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
