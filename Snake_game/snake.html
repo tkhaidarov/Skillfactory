@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Snake game</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <header class="header">
+                <img src="img/snake.jpg" alt="Snake image" />
+            </header>
+            <div class="container">
+                <div id="grid_input" class="container__input-form">
+                    <label for="grid-size">Введите размер поля (NxN):</label>
+                    <input
+                        type="number"
+                        id="grid-size"
+                        min="10"
+                        max="20"
+                        value="10"
+                    />
+                    <button id="btn-grid" class="init-grid">Создать</button>
+                </div>
+                <div id="score-container" class="container__score">
+                    <div class="current-score-container">
+                        <p>Текущий:</p>
+                        <span id="current-score">s</span>
+                    </div>
+                    <button id="restart">Перезапустить</button>
+                    <div class="current-score-container">
+                        <p>Лучший:</p>
+                        <span id="best-score">s</span>
+                    </div>
+                </div>
+                <div id="container__grid" class="grid"></div>
+            </div>
+        </main>
+        <script type="module" src="app.js"></script>
+    </body>
+</html>
