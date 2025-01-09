@@ -1,3 +1,5 @@
+import { Food } from "./Food.js"
+
 export class Snake {
     constructor(gridContainer, inputSize, gridSize) {
         this.gridContainer = document.getElementById(gridContainer)
@@ -8,13 +10,14 @@ export class Snake {
             { row: 5, col: 4 },
         ]
         this.direction = { row: 0, col: 1 }
-        this.food = null
+        this.food = new Food(this.gridContainer, this.inputGridSize)
+        this.food.generation(this.snake)
         this.interval = null
         this.score = 0
         this.bestScore = localStorage.getItem("bestScore") || 0
         this.updateScoreDisplay()
         document.addEventListener("keydown", (e) => this.changeDirection(e))
-        this.spawnFood()
+        this.food.generation(this.snake)
         this.start()
         document
             .getElementById("restart")
@@ -23,17 +26,6 @@ export class Snake {
 
     start() {
         this.interval = setInterval(() => this.move(), 500)
-    }
-
-    stop() {
-        clearInterval(this.interval)
-    }
-
-    updateScoreDisplay() {
-        let scoreElement = document.getElementById("current-score")
-        let bestScoreElement = document.getElementById("best-score")
-        if (scoreElement) scoreElement.textContent = `${this.score}`
-        if (bestScoreElement) bestScoreElement.textContent = `${this.bestScore}`
     }
 
     move() {
@@ -62,16 +54,16 @@ export class Snake {
         }
         this.snake.unshift(newHead)
         if (
-            this.food &&
-            newHead.row === this.food.row &&
-            newHead.col === this.food.col
+            this.food.position &&
+            newHead.row === this.food.position.row &&
+            newHead.col === this.food.position.col
         ) {
             this.score++
             if (this.score > this.bestScore) {
                 this.bestScore = this.score
                 localStorage.setItem("bestScore", this.bestScore)
             }
-            this.spawnFood()
+            this.food.generation(this.snake)
         } else {
             this.snake.pop()
         }
@@ -79,19 +71,25 @@ export class Snake {
         this.render()
     }
 
-    restartGame() {
-        let restartBtn = document.getElementById("restart")
-        restartBtn.style.display = "none"
-        this.snake = [
-            { row: 5, col: 5 },
-            { row: 5, col: 4 },
-        ]
-        this.direction = { row: 0, col: 1 }
-        this.food = null
-        this.score = 0
-        this.updateScoreDisplay()
-        this.spawnFood()
-        this.start()
+    render() {
+        Array.from(
+            this.gridContainer.querySelectorAll(".cell.snake, .cell.snake-head")
+        ).forEach((cell) => {
+            cell.classList.remove("snake", "snake-head")
+        })
+        this.snake.forEach((segment, index) => {
+            let cell = this.gridContainer.querySelector(
+                `.cell[data-row="${segment.row}"][data-col="${segment.col}"]`
+            )
+            if (cell) {
+                if (index === 0) {
+                    cell.classList.add("snake-head")
+                } else {
+                    cell.classList.add("snake")
+                }
+            }
+        })
+        this.food.render()
     }
 
     changeDirection(e) {
@@ -112,49 +110,28 @@ export class Snake {
         }
     }
 
-    spawnFood() {
-        const allCells = Array.from(document.querySelectorAll(".cell"))
-        const emptyCells = allCells.filter((cell) => {
-            let row = parseInt(cell.dataset.row)
-            let col = parseInt(cell.dataset.col)
-            return !this.snake.some(
-                (segment) => segment.row === row && segment.col === col
-            )
-        })
-        const randomCell =
-            emptyCells[Math.floor(Math.random() * emptyCells.length)]
-        if (randomCell) {
-            this.food = {
-                row: parseInt(randomCell.dataset.row),
-                col: parseInt(randomCell.dataset.col),
-            }
-        }
-        this.render()
+    stop() {
+        clearInterval(this.interval)
     }
 
-    render() {
-        Array.from(this.gridContainer.querySelectorAll(".cell")).forEach(
-            (cell) => {
-                cell.classList.remove("snake", "food", "snake-head")
-            }
-        )
-        this.snake.forEach((segment, index) => {
-            let cell = this.gridContainer.querySelector(
-                `.cell[data-row="${segment.row}"][data-col="${segment.col}"]`
-            )
-            if (cell) {
-                if (index === 0) {
-                    cell.classList.add("snake-head")
-                } else {
-                    cell.classList.add("snake")
-                }
-            }
-        })
-        if (this.food) {
-            let foodCell = this.gridContainer.querySelector(
-                `.cell[data-row="${this.food.row}"][data-col="${this.food.col}"]`
-            )
-            if (foodCell) foodCell.classList.add("food")
-        }
+    restartGame() {
+        let restartBtn = document.getElementById("restart")
+        restartBtn.style.display = "none"
+        this.snake = [
+            { row: 5, col: 5 },
+            { row: 5, col: 4 },
+        ]
+        this.direction = { row: 0, col: 1 }
+        this.score = 0
+        this.updateScoreDisplay()
+        this.food.generation(this.snake)
+        this.start()
+    }
+
+    updateScoreDisplay() {
+        let scoreElement = document.getElementById("current-score")
+        let bestScoreElement = document.getElementById("best-score")
+        if (scoreElement) scoreElement.textContent = `${this.score}`
+        if (bestScoreElement) bestScoreElement.textContent = `${this.bestScore}`
     }
 }

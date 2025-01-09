@@ -3,7 +3,7 @@ import { InitGridDefault } from "./initGridDefault.js"
 import { Snake } from "./snake.js"
 
 let options = {
-    size: false,
+    size: true,
 }
 
 class StartGame {
