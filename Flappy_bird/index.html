@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Flappy bird</title>
+      <link rel="stylesheet" href="style.css" />
+   </head>
+   <body>
+      <main>
+         <div class="canvas-container">
+            <canvas id="canvas" width="360" height="640"></canvas>
+            <div id="score-container" class="container__score">
+               <div class="current-score-container">
+                  <p>Текущий:</p>
+                  <span id="current-score"></span>
+               </div>
+               <div class="current-score-container">
+                  <p>Лучший:</p>
+                  <span id="best-score"></span>
+               </div>
+            </div>
+            <div id="btn-container">
+               <button id="start-btn">Начать игру</button>
+               <button id="restart-btn">Начать заново</button>
+            </div>
+         </div>
+      </main>
+      <script type="module" src="main.js"></script>
+   </body>
+</html>
