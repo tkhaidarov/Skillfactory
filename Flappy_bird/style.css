@@ -1,0 +1,98 @@
+body {
+   margin: 0;
+   text-align: center;
+   background: #000000;
+}
+
+.canvas-container {
+   position: relative;
+   width: 360px;
+   height: 640px;
+   margin: 50px auto 0;
+}
+
+canvas {
+   border-radius: 5px;
+   display: block;
+   position: absolute;
+   z-index: 1;
+   top: 0;
+   left: 0;
+}
+
+.container__score {
+   position: absolute;
+   bottom: 10px;
+   left: 10%;
+   z-index: 2;
+   display: flex;
+   gap: 100px;
+   font-weight: 500;
+   font-family: 'Nunito Sans 10pt', Arial, sans-serif;
+   font-size: 16px;
+}
+
+.current-score-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 5px;
+}
+
+#btn-container {
+   display: block;
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   background: rgba(18, 18, 18, 0.7);
+   z-index: 3;
+}
+
+#start-btn {
+   display: block;
+   position: absolute;
+   top: 30vh;
+   left: 110px;
+   border: none;
+   cursor: pointer;
+   margin: 5px 10px;
+   padding: 10px 15px;
+   border-radius: 3px;
+   font-size: 14px;
+   line-height: 15px;
+   text-transform: uppercase;
+   color: white;
+   background: #2aa13f;
+   transition: 0.3s;
+   align-items: center;
+   z-index: 4;
+}
+
+#start-btn:hover {
+   transform: scale(1.05);
+}
+
+#restart-btn {
+   display: none;
+   position: absolute;
+   top: 30vh;
+   left: 110px;
+   border: none;
+   cursor: pointer;
+   margin: 5px 10px;
+   padding: 10px 15px;
+   border-radius: 3px;
+   font-size: 14px;
+   line-height: 15px;
+   text-transform: uppercase;
+   color: white;
+   background: #2aa13f;
+   transition: 0.3s;
+   align-items: center;
+   cursor: pointer;
+   z-index: 4;
+}
+
+#restart-btn:hover {
+   transform: scale(1.05);
+}
