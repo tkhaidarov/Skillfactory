@@ -3,7 +3,7 @@ export class Collision {
       this.bird = bird;
       this.pipe = pipe;
       this.canvas = canvas;
-      this.groundLevel = canvas.height * 0.75;
+      this.groundLevel = canvas.height * 0.9;
    }
 
    _isColliding(rect1, rect2) {

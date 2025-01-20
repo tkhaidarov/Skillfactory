@@ -20,10 +20,10 @@ export class Config {
 
    bird = {
       property: {
-         animationSpeed: 10,
-         gravity: 0.09,
-         gravityIncrement: 0.001,
-         flapSpeed: 3.5,
+         animationSpeed: 7,
+         gravity: 0.085,
+         gravityIncrement: 0.002,
+         flapSpeed: 3.6,
       },
       startPosition: {
          x: null,
@@ -75,7 +75,7 @@ export class Config {
    pipe = {
       minTopHeight: 50,
       gap: 150,
-      speed: 1.2,
+      speed: 1.4,
       space: 180,
       count: 3,
    };

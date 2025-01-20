@@ -37,10 +37,10 @@ export class Background {
    }
 
    drawUp() {
-      this.drawPart(this._bgndUp, 0, 0.75);
+      this.drawPart(this._bgndUp, 0, 0.9);
    }
 
    drawBottom() {
-      this.drawPart(this._bgndDown, this._canvas.height * 0.75, 0.25);
+      this.drawPart(this._bgndDown, this._canvas.height * 0.9, 0.1);
    }
 }
