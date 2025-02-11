@@ -1,0 +1,614 @@
+* {
+   margin: 0;
+   box-sizing: border-box;
+   font-family: 'Inter', sans-serif;
+   font-weight: 400;
+}
+
+.header {
+   min-height: 101px;
+   background: #d9d9d9;
+   margin-bottom: 40px;
+}
+
+.main {
+   display: flex;
+   flex-direction: row;
+   gap: 86px;
+}
+
+.main__content {
+   width: 1022px;
+}
+
+.main__sidebar {
+   display: block;
+   background: #d9d9d9;
+   width: 203px;
+}
+
+.main__info-block {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+   margin-bottom: 40px;
+}
+
+.main__small-blocks {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-column-gap: 48px;
+   grid-row-gap: 30px;
+}
+
+.main__small-block {
+   display: block;
+   min-height: 61px;
+   background: #d9d9d9;
+}
+
+.main__big-block {
+   width: 100%;
+   height: 168px;
+   background: #d9d9d9;
+}
+
+hr {
+   height: 3px;
+   background: #d9d9d9;
+   border: none;
+}
+
+.main__comments-nav {
+   display: flex;
+   gap: 55px;
+   align-items: baseline;
+   margin-bottom: 30px;
+}
+
+.main__filter-block {
+   display: flex;
+   align-items: baseline;
+   gap: 55px;
+}
+
+.main__comment-header-wrap {
+   font-size: 20px;
+   font-weight: 500;
+   display: flex;
+   gap: 10px;
+   border-bottom: 2px solid #000000;
+}
+
+.style-dropdown-favorite {
+   font-weight: 400;
+   font-size: 16px;
+   text-decoration: underline;
+   text-underline-offset: 4px;
+   color: rgba(0, 0, 0, 0.4);
+   cursor: pointer;
+   display: flex;
+   gap: 10px;
+   align-items: center;
+}
+
+.main__selected-option .arrow {
+   width: 18px;
+   height: 15px;
+   transition: transform 0.3s ease;
+}
+
+.main__comments-dropdown.open .main__selected-option .arrow {
+   transform: rotate(180deg);
+}
+
+.main__comments-dropdown .main__options {
+   position: absolute;
+   top: 30px;
+   left: 0;
+   width: 229px;
+   min-height: 108px;
+   background-color: #fff;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+   display: none;
+   z-index: 10;
+}
+
+.main__comments-dropdown.open .main__options {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   font-weight: 400;
+   font-size: 16px;
+   color: rgba(0, 0, 0, 0.4);
+   padding: 8px;
+}
+
+.main__comments-dropdown .main__options span {
+   cursor: pointer;
+}
+
+.main__comments-dropdown .main__options .main__option-wrap:hover {
+   background-color: #d9d9d9;
+}
+
+.main__comments-dropdown {
+   position: relative;
+   user-select: none;
+}
+
+.main__option-wrap {
+   display: flex;
+   gap: 8px;
+   background: #fff;
+}
+
+.checkmark {
+   visibility: hidden;
+   width: 15px;
+   height: 15px;
+   background: url(../img/svg/mark.svg) no-repeat;
+}
+
+.checkmark.visible {
+   visibility: visible;
+}
+
+.main__comments-input-form {
+   display: grid;
+   grid-template-columns: 61px 688px auto;
+   grid-template-rows: 20px auto;
+   grid-template-areas:
+      'a b c'
+      'a d e';
+   grid-column-gap: 30px;
+   grid-row-gap: 15px;
+   margin-bottom: 40px;
+}
+
+.main__input-form-wrap {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.main__input-form {
+   grid-area: c;
+   display: flex;
+   gap: 30px;
+   margin-top: -15px;
+}
+
+.main__user-avatar {
+   width: 61px;
+   height: 61px;
+   border-radius: 50%;
+   grid-area: a;
+}
+
+.main__input-area {
+   grid-area: d;
+   border-radius: 5px;
+   border: none;
+   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+   background: #fff;
+   min-height: 61px;
+   max-height: 190px;
+   font-size: 18px;
+   padding: 20px 30px 0;
+   resize: none;
+   overflow: hidden;
+   overflow-y: scroll;
+}
+
+#comment-input::-webkit-scrollbar {
+   display: none;
+}
+
+.main__input-area::placeholder {
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+.main__input-area:focus {
+   border: none;
+   outline: none;
+   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+#warning-message {
+   grid-area: c;
+   width: 213px;
+   font-size: 14px;
+}
+
+.main__personal-name {
+   grid-area: b;
+   display: flex;
+   justify-content: space-between;
+}
+
+#submit-button {
+   grid-area: e;
+   border: none;
+   border-radius: 5px;
+   width: 213px;
+   height: 61px;
+   cursor: not-allowed;
+   transition: background-color 0.3s ease;
+   background: #a1a1a1;
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.8);
+}
+
+#submit-button:not(:disabled) {
+   background: #abd873;
+   cursor: pointer;
+}
+
+.main__comments {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding-bottom: 80px;
+}
+
+.main__comment {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.comment-wrap {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.all-comments {
+   display: grid;
+   grid-template-columns: 61px auto;
+   grid-template-rows: 23px auto 23px;
+   grid-column-gap: 30px;
+   grid-row-gap: 10px;
+   grid-template-areas:
+      'a b'
+      'a c'
+      'a d';
+}
+
+.repliesContainer {
+   margin-left: 91px;
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.reply-wrap {
+   display: flex;
+   gap: 15px;
+   align-self: flex-end;
+}
+
+.reply-wrap span {
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+.reply-input {
+   margin-left: 91px;
+   width: 100%;
+}
+
+.send-reply-button {
+   width: 22px;
+   height: 22px;
+   background: url(../img/svg/reply.svg) no-repeat;
+   border: none;
+   cursor: pointer;
+}
+
+.reply-container {
+   display: flex;
+   gap: 15px;
+   width: 750px;
+   margin-left: 100px;
+}
+
+.name-container {
+   grid-area: b;
+   display: flex;
+   gap: 15px;
+   align-items: baseline;
+}
+
+.comment-text {
+   grid-area: c;
+}
+
+.main__btn-group {
+   grid-area: d;
+   display: flex;
+   gap: 20px;
+   align-items: center;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+.reply-button {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.4);
+   background: none;
+   border: none;
+   cursor: pointer;
+}
+
+.favorite-container {
+   display: flex;
+   gap: 7px;
+   align-items: center;
+}
+
+.favorite-btn {
+   background: none;
+   border: none;
+   cursor: pointer;
+}
+
+.dislike-btn,
+.like-btn {
+   width: 20px;
+   height: 20px;
+   border: none;
+   border-radius: 50%;
+   font-weight: 600;
+   background: rgba(0, 0, 0, 0.1);
+   cursor: pointer;
+}
+
+.dislike-btn {
+   color: #f00;
+}
+
+.like-btn,
+.rating-container {
+   color: #8ac540;
+}
+
+.rating-container {
+   display: flex;
+   gap: 10px;
+}
+
+.user-name {
+   font-weight: 500;
+   font-size: 18px;
+   color: #122ac0;
+}
+
+#count-symbol {
+   color: rgba(0, 0, 0, 0.4);
+   font-size: 14px;
+   font-style: italic;
+}
+
+.comment-time {
+   font-size: 14px;
+   color: rgba(0, 0, 0, 0.4);
+   align-self: flex-end;
+   padding-bottom: 2px;
+}
+
+.favorite-text {
+   width: 97px;
+}
+
+.rating-score {
+   width: 15px;
+   text-align: center;
+}
+
+@media (max-width: 600px) {
+   body {
+      font-size: 14px;
+   }
+
+   .header {
+      width: 100%;
+   }
+
+   .main {
+      display: flex;
+      flex-direction: column;
+      max-width: 85vw;
+      margin: 0 auto;
+   }
+
+   .main__sidebar {
+      display: none;
+   }
+
+   .main__content {
+      width: 100%;
+   }
+
+   .main__info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+   }
+
+   .main__small-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+   }
+
+   .main__small-block:nth-child(n + 3) {
+      display: none;
+   }
+
+   .main__comments-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+   }
+
+   .main__filter-block {
+      justify-content: space-between;
+      width: 100%;
+      gap: 25px;
+   }
+
+   .style-dropdown-favorite {
+      font-size: 14px;
+      width: 176px;
+   }
+
+   .main__comments-input-form {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .main__input-form {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .main__comments-input-form {
+      display: grid;
+      grid-template-columns: 50px auto;
+      grid-template-rows: 50px auto 50px;
+      grid-template-areas:
+         'a b'
+         'c c'
+         'd d'
+         'e e';
+      grid-column-gap: 20px;
+      grid-row-gap: 15px;
+   }
+
+   .main__user-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      grid-area: a;
+   }
+
+   .main__personal-name {
+      display: flex;
+      flex-direction: column;
+      grid-area: b;
+      padding-top: 14.5px;
+   }
+
+   .main__input-area {
+      grid-area: c;
+      max-height: 280px;
+   }
+
+   #submit-button {
+      grid-area: d;
+      width: 100%;
+      height: 50px;
+   }
+
+   #count-symbol {
+      align-self: flex-end;
+   }
+
+   #warning-message {
+      grid-area: e;
+   }
+
+   .all-comments {
+      display: grid;
+      grid-template-columns: 50px minmax(150px, 1fr);
+      grid-template-rows: minmax(50px, 65px) auto 62px;
+      grid-template-areas:
+         'a b'
+         'c c'
+         'd d';
+      grid-column-gap: 10px;
+   }
+
+   .name-container {
+      grid-area: b;
+      display: grid;
+      grid-template-columns: auto minmax(72px, 80px);
+      grid-template-rows: min-content min-content;
+      grid-template-areas:
+         'name time'
+         'replyName replyName';
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      align-items: baseline;
+      padding-top: 14.5px;
+   }
+
+   .user-name {
+      grid-area: name;
+      font-size: 16px;
+   }
+
+   .reply-wrap {
+      grid-area: replyName;
+   }
+
+   .comment-time {
+      grid-area: time;
+      align-self: unset;
+   }
+
+   .comment-text {
+      grid-area: c;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+   }
+
+   .main__btn-group {
+      grid-area: d;
+      display: flex;
+      gap: 15px;
+   }
+
+   .rating-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+   }
+
+   .repliesContainer {
+      margin: 0;
+   }
+
+   .reply-wrap span {
+      font-size: 16px;
+   }
+
+   .main__comments {
+      padding-bottom: 50px;
+   }
+
+   .reply-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+   }
+
+   .reply-input {
+      margin-left: 0;
+      width: 100%;
+   }
+
+   .send-reply-button {
+      align-self: flex-end;
+   }
+}
