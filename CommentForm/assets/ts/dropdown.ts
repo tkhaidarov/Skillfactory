@@ -72,6 +72,24 @@ export class Dropdown {
       }
       this.updateSelectedText(option.textContent);
       this.closeDropdown();
+      const criteria = this.indexToCriteria(index);
+      const sortEvent = new CustomEvent('sortOptionSelected', { detail: { criteria } });
+      this.dropdown.dispatchEvent(sortEvent);
+   }
+
+   private indexToCriteria(index: string | null): string {
+      switch (index) {
+         case '0':
+            return 'ratings';
+         case '1':
+            return 'date';
+         case '2':
+            return 'relevance';
+         case '3':
+            return 'replies';
+         default:
+            return 'date';
+      }
    }
 
    private updateSelectedText(text: string | null): void {

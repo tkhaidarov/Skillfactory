@@ -14,6 +14,7 @@ import { AddReply } from './addReply.js';
 import { ShowReplyInput } from './showReplyInput.js';
 import { CommentElement } from './commentElement.js';
 import { CharacterCounter } from './characterCounter.js';
+import { FilterComment } from './filterComment.js';
 export class CommentSystem {
     constructor() {
         this.currentUser = null;
@@ -24,6 +25,7 @@ export class CommentSystem {
         this.addReply = new AddReply(this.commentCounter, this.commentElement);
         this.addComment = new AddComment(this.commentCounter, this.commentElement);
         this.showReplyInput.setAddReply(this.addReply);
+        this.filterComment = new FilterComment('#comment-list');
         this.characterCounter = new CharacterCounter('comment-input', 'count-symbol', 'warning-message', 'submit-button', 1000);
         this.userAvatar = document.getElementById('user-avatar');
         this.userName = document.getElementById('user-name');
@@ -45,10 +47,19 @@ export class CommentSystem {
             savedComments.forEach((comment) => {
                 this.commentList.appendChild(comment);
             });
+            this.commentCounter.loadCount();
             this.submitButton.addEventListener('click', () => {
                 this.addComment.addElem(this.commentInput, this.commentList, this.currentUser, () => this.loadRandomUser());
                 this.characterCounter.resetCounter();
             });
+            const dropdownEl = document.getElementById('main__comments-dropdown');
+            if (dropdownEl) {
+                dropdownEl.addEventListener('sortOptionSelected', (event) => {
+                    const customEvent = event;
+                    const criteria = customEvent.detail.criteria;
+                    this.filterComment.sort(criteria);
+                });
+            }
         });
     }
     loadRandomUser() {

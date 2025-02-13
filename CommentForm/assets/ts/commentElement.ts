@@ -32,7 +32,10 @@ export class CommentElement {
       const now = new Date();
       const date = now.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }); // Формат: ДД.ММ
       const time = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }); // Формат: ЧЧ:ММ
-      const timestamp = `${date} ${time}`;
+      const displayTime = `${date} ${time}`;
+      const timestamp = now.toISOString();
+      comment.dataset.timestamp = timestamp;
+      comment.dataset.rating = '0';
       comment.classList.add('main__comment');
       comment.dataset.commentId = commentId;
       if (parentId) {
@@ -45,7 +48,7 @@ export class CommentElement {
                 <div class="name-container">
                   <span class="user-name parent-name">${user?.name.first} ${user?.name.last}</span>
                   ${parentUserName ? `<div class="reply-wrap"><img src="./assets/img/svg/reply.svg" alt="reply svg"><span class="parent-user-name">${parentUserName}</span></div>` : ''}
-                  <span class="comment-time">${timestamp}</span>
+                  <span class="comment-time">${displayTime}</span>
                 </div>
                <p class="comment-text">${text}</p> 
                <div class="main__btn-group">
